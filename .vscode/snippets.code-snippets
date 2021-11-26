@@ -1,0 +1,137 @@
+{
+	// Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"React Component Index": {
+		"prefix": "compindex",
+		"scope": "javascriptreact, javascript",
+		"body": "export { default } from './${TM_DIRECTORY/^.+\\/(.*)$/$1/}';"
+	},
+	"React Component": {
+		"prefix": "comp",
+		"scope": "javascriptreact, javascript",
+		"body": [
+			"import PropTypes from 'prop-types';",
+			"import React from 'react';",
+			"",
+			"/**",
+			" * @param {Object} props",
+			" * @return {StatelessComponent}",
+			" */",
+			"const $TM_FILENAME_BASE = ({ $1 }) => (",
+			"\t$2",
+			");",
+			"",
+			"$TM_FILENAME_BASE.propTypes = {",
+			"\t$3",
+			"};",
+			"",
+			"export default $TM_FILENAME_BASE"
+		],
+		"description": "Create default React component"
+	},
+	"React Component Test": {
+		"prefix": "comptest",
+		"scope": "javascriptreact, javascript",
+		"body": [
+			"import { shallow } from 'enzyme';",
+			"import React from 'react';",
+			"",
+			"import { expectSnapshot } from 'testing/helpers';",
+			"",
+			"import ${TM_DIRECTORY/^.+\\/(.*)$/$1/} from './${TM_DIRECTORY/^.+\\/(.*)$/$1/}';",
+			"",
+			"const getProps = (overrides = {}) => ({",
+			"\t$1",
+			"\t...overrides",
+			"});",
+			"",
+			"describe('<${TM_DIRECTORY/^.+\\/(.*)$/$1/} />', () => {",
+			"\tit('renders properly', () => {",
+			"\t\tconst props = getProps();",
+			"\t\tconst wrapper = shallow(<${TM_DIRECTORY/^.+\\/(.*)$/$1/} {...props} />);",
+			"\t\texpectSnapshot(wrapper);",
+			"\t});",
+			"});"
+		]
+	},
+	"React Component Story": {
+		"prefix": "compstory",
+		"scope": "javascriptreact, javascript",
+		"body": [
+			"import React from 'react';",
+			"",
+			"import ${TM_DIRECTORY/^.+\\/(.*)$/$1/} from './${TM_DIRECTORY/^.+\\/(.*)$/$1/}';",
+			"",
+			"export default {",
+			"\ttitle: '__CHANGE_ME__/${TM_DIRECTORY/^.+\\/(.*)$/$1/}',",
+			"\tcomponent: ${TM_DIRECTORY/^.+\\/(.*)$/$1/}",
+			"};",
+			"",
+			"const Template = (args) => <${TM_DIRECTORY/^.+\\/(.*)$/$1/} {...args} />;",
+			"",
+			"export const Default = Template.bind({});",
+			"Default.args = {",
+			"\t$1",
+			"};",
+			"",
+		]
+	},
+	"React Component Container": {
+		"prefix": "compcont",
+		"scope": "javascriptreact, javascript",
+		"body": [
+			"import { connect } from 'react-redux';",
+			"import { createStructuredSelector } from 'reselect';",
+			"",
+			"import ${TM_DIRECTORY/^.+\\/(.*)$/$1/} from './${TM_DIRECTORY/^.+\\/(.*)$/$1/}';",
+			"",
+			"export const mapStateToProps = createStructuredSelector({",
+			"\t$1",
+			"});",
+			"",
+			"export const mapDispatchToProps = {",
+			"\t$2",
+			"};",
+			"",
+			"export default connect(",
+			"\tmapStateToProps,",
+			"\tmapDispatchToProps",
+			")(${TM_DIRECTORY/^.+\\/(.*)$/$1/});",
+			"",
+		]
+	},
+	"React Component Container Test": {
+		"prefix": "compconttest",
+		"scope": "javascriptreact, javascript",
+		"body": [
+			"import { getTestState, testMapDispatchToProps, testMapStateToProps } from 'testing/helpers';",
+			"",
+			"import { mapDispatchToProps, mapStateToProps } from './${TM_DIRECTORY/^.+\\/(.*)$/$1/}Container';",
+			"",
+			"const state = getTestState({",
+			"\t$1",
+			"});",
+			"",
+			"describe('<${TM_DIRECTORY/^.+\\/(.*)$/$1/}Container />', () => {",
+			"\ttestMapStateToProps(mapStateToProps, { $2 });",
+			"",
+			"\ttestMapDispatchToProps(mapDispatchToProps, { $3 });",
+			"})",
+			""
+		]
+	}
+}
